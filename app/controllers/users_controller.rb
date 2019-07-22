@@ -23,7 +23,7 @@ class UsersController < ApplicationController
   end
 
   def edit
-    @user = User.find(prams[:id])
+    @user = User.find(params[:id])
   end
 
   def update
@@ -40,12 +40,13 @@ class UsersController < ApplicationController
   def destroy
     @user = User.find(params[:id])
     @user.destroy
+    flash[:danger] ='Deleted!!'
     redirect_to new_user_path
   end
 
   private
 
   def user_params
-    params.require(:user).permit(:name,:email,:password,:password_confirmation)
+    params.require(:user).permit(:name,:email,:password,:password_confirmation,:image,:image_cache)
   end
 end

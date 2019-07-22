@@ -1,1 +1,26 @@
 <h1>User Info.</h1>
+<div class='row'>
+	<div class='col-sm-4'>
+	<%= link_to 'Edit',edit_user_path(@user),class:'btn btn-info btn-lg' %>
+	<%= link_to 'Delete',user_path(@user),method: :delete,class:'btn btn-danger btn-lg' %>
+
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<% if @user.image? %>
+		    	<%= image_tag @user.image.url(:thumb) %>
+		    <% else %>
+		    	<p>No Image</p>
+		    <% end %>
+			</div>
+			<div class="panel-body">
+				<%= @user.name %>
+			</div>
+			<div class="panel-footer">
+				<%= @user.email %>
+			</div>
+		</div>
+	</div>
+
+	<div class='col-sm-8'>
+	</div>
+</div>
