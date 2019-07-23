@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
   before_action :require_user_login
-  before_action :user_identify, only:[:edit,:show,:destroy,:update]
+  before_action :user_identify, only:[:edit]
 
   def index
     if logged_in?
@@ -67,9 +67,11 @@ class PostsController < ApplicationController
   end
 
   def post_identify
-    @post = current_user.posts.find_by(id: params[:id])
-    unless @post
-      redirect_to root_path
-    end
+    @post = Post.find_by(id: params[:id])
+    redirect_to root_path if @post.user_id != current_user.id
+    # else がなければすべて後置ifにできる
+    # if @post.user_id != current_user.id
+    #   redirect_to root_path
+    # end
   end
 end
