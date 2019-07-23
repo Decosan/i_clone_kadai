@@ -9,6 +9,12 @@ class UsersController < ApplicationController
     count(@user)
   end
 
+  def like
+    @user = User.find(params[:id])
+    @posts = Post.all.order("created_at DESC")
+    count(@user)
+  end
+
   def new
     @user = User.new
   end

@@ -29,7 +29,33 @@
 
 		</ul>
 
-		<%= render 'posts/posts', posts: @posts %>
+    <ul class="media-list">
+      <% @posts.each do |post| %>
+        <% unless post.user_id == current_user.id %>
+          <% if current_user.favorites.pluck('post_id').include?(post.id) %>
+          	<li class="media">
+          		<h4 class="media-left" style="color: blue;">
+          			<%= post.user.name %>
+          		</h4>
+          		<div class="media-body">
+          			<h4 class="media-heading"><%= post.title %></h4>
+          			<%= post.content %>
+          		</div>
+              <div>
+                  <%= link_to 'お気に入り解除',favorite_path(id: post.id),method: :delete,class:'btn btn-danger btn-sm' %>
+              </div>
+              <div>
+                <% if post.image? %>
+                  <%= image_tag post.image.url %>
+                <% else %>
+                  <p>No Image</p>
+                <% end %>
+              </div>
+          	</li>
+          <% end %>
+        <% end %>
+      <% end %>
+    </ul>
 
 	</div>
 </div>
