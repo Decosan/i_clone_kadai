@@ -22,5 +22,13 @@
 	</div>
 
 	<div class='col-sm-8'>
+		<ul class="nav nav-tabs">
+			<li role="presentation" class="<%='active' if current_page? (user_path(@user)) %>"><%= link_to user_path(@user) do %>My Posts<span class='badge'><%= @count_posts %></span><% end %></li>
+			<li role="presentation"><a href="#">メニューＡ</a></li>
+			<li role="presentation"><a href="#">メニューＢ</a></li>
+		</ul>
+
+		<%= render 'posts/posts', posts: @posts %>
+
 	</div>
 </div>
