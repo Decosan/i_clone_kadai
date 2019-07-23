@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
   before_action :require_user_login
+  before_action :user_identify, only:[:edit,:show,:destroy,:update]
 
   def index
     if logged_in?
@@ -63,5 +64,12 @@ class PostsController < ApplicationController
 
   def post_params
     params.require(:post).permit(:title,:content,:image,:image_cache)
+  end
+
+  def post_identify
+    @post = current_user.posts.find_by(id: params[:id])
+    unless @post
+      redirect_to root_path
+    end
   end
 end

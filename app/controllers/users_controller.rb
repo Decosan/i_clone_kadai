@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  before_action :require_user_login, only:[:index,:show,:like,:edit]
+  
   def index
     @users = User.all.page(params[:page])
   end

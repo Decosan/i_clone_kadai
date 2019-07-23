@@ -25,7 +25,7 @@
 		<ul class="nav nav-tabs">
 			<li role="presentation" class="<%='active' if current_page? (user_path(@user)) %>"><%= link_to user_path(@user) do %>My Posts<span class='badge'><%= @count_posts %></span><% end %></li>
 
-			<li role="presentation" class="<%='active' if current_page? (like_user_path(@user)) %>"><%= link_to like_user_path(@user) do %>My Posts<span class='badge'><%= @count_favs %></span><% end %></li>
+			<li role="presentation" class="<%='active' if current_page? (like_user_path(@user)) %>"><%= link_to like_user_path(@user) do %>My Favs<span class='badge'><%= @count_favs %></span><% end %></li>
 
 		</ul>
 
