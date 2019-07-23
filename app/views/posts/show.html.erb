@@ -1,6 +1,16 @@
 <h1>Post</h1>
+<div>
+  <%= link_to 'Edit',edit_post_path(@post.id),class:'btn btn-warning btn-lg' %>
+  <%= link_to 'Delete',post_path(@post.id),method: :delete,data: {confirm:"Are you OK?"},class:'btn btn-danger btn-lg' %>
+</div>
 <div class="jumbotron">
-	<h1>ジャンボトロン</h1>
-	<p>WEBサイトにおける主要コンテンツを紹介するのに適したスタイル。</p>
-	<p><a class="btn btn-primary btn-lg" href="./jumbotron.html" role="button">もっと詳しく</a></p>
+	<h1>Title:<%= @post.title %></h1>
+	<p>Content:<%= @post.content %></p>
+  <div>
+    <% if @post.image? %>
+      <%= image_tag @post.image.url %>
+    <% else %>
+      <p>No Image</p>
+    <% end %>
+  </div>
 </div>

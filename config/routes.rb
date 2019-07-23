@@ -8,8 +8,14 @@ Rails.application.routes.draw do
   get 'signup', to: 'users#new'
 
 
-  resources :users
-  resources :sessions, only:[:create,:destroy]
-  resources :posts, only:[:index,:show,:create,:edit,:update,:destroy]
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  resources :users do
+    member do
+      get :like
+    end
+  end
+  resources :posts, only:[:index,:show,:create,:edit,:update,:destroy] do
+    collection do
+      post :confirm
+    end
+  end
 end

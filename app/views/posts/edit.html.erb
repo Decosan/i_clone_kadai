@@ -1,2 +1,23 @@
-<h1>Posts#edit</h1>
-<p>Find me in app/views/posts/edit.html.erb</p>
+<h1>Post Edit</h1>
+<%= form_with(model: @post, local: true)do |f| %>
+<%= render 'layouts/error_messages',model: f.object %>
+
+  <div class='post-group'>
+    <%= f.label :title,"title" %>
+    <%= f.text_field :title, class:'form-control' %>
+  </div>
+
+  <div class='post-group'>
+    <%= f.label :content,"content" %>
+    <%= f.text_area :content, class:'form-control',row:2 %>
+  </div>
+
+  <div class="post-group">
+    <%= f.label :image %>
+    <%= image_tag @post.image.url if @post.image? %>
+    <%= f.file_field :image %>
+    <%= f.hidden_field :image_cache %>
+  </div>
+
+  <%= f.submit 'OK!',class:"btn btn-primary btn-lg" %>
+<% end %>

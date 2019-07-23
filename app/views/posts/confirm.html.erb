@@ -1,0 +1,26 @@
+<h1>Are you OK?</h1>
+
+<%= form_with(model: @post,url: posts_path,local: true,method: :post)do |f| %>
+  <div class='confirm-group'>
+    <%= f.hidden_field :title %>
+    <%= f.hidden_field :content %>
+    <%= f.hidden_field :image %>
+    <%= f.hidden_field :image_cache %>
+  </div>
+
+  <div>
+    <p>Title:<%= @post.title %></p>
+    <p>Content:<%= @post.content %></p>
+    <p>Image:<%= image_tag @post.image.url if @post.image? %></p>
+  </div>
+  <%= f.submit 'OK!' %>
+<% end %>
+
+<%= form_with(model: @post,url: root_path,local: true,method:'get')do |f| %>
+
+  <%= f.hidden_field :title %>
+  <%= f.hidden_field :content %>
+  <%= f.hidden_field :image %>
+  <%= f.hidden_field :image_cache %>
+  <%= f.submit 'Back!',name:'back' %>
+<% end %>
