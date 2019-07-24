@@ -14,8 +14,11 @@ class PostsController < ApplicationController
   end
 
   def confirm
-    @post = current_user.posts.build(post_params)
     @posts = Post.all.order("created_at DESC").page(params[:page])
+    @post = current_user.posts.build(post_params)
+    if @post.invalid?
+      render 'index'
+    end
   end
 
   def show
@@ -27,7 +30,9 @@ class PostsController < ApplicationController
 
   def create
     @post = current_user.posts.build(post_params)
+    @user = current_user
     if @post.save
+      ContactMailer.contact_mail(@user).deliver
       flash[:success] ='Post created!'
       redirect_to root_path
     else
